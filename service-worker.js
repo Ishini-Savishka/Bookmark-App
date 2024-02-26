@@ -5,7 +5,7 @@ self.addEventListener('install', function(event) {
       caches.open('bookmark-v1').then(function(cache) {
         return cache.addAll([
           '/',
-          '/index.php',
+          '/index.html',
           '/style.css',
           '/script.js',
           '/icon.png'
