@@ -27,11 +27,11 @@ if ($conn->connect_error) {
   <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="dist/css/style.css">
-  <link rel="manifest" href="/dist/manifest.json">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#ffffff">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
