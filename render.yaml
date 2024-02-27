@@ -2,5 +2,5 @@ services:
   - name: php
     type: web
     buildCommand: null
-    startCommand: php -S 0.0.0.0:$PORT index.php
+    startCommand: php -S 0.0.0.0:$PORT -t public
     env: php
