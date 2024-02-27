@@ -1,19 +1,3 @@
-<?php
-// Database configuration
-$servername = "localhost:3308";
-$username = "root";
-$password = "ish@123";
-$database = "bookmark";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,71 +76,68 @@ if ($conn->connect_error) {
                 </div>
                 <br>
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
+<!-- Sidebar Menu -->
+<nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-        <li class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? 'menu-open' : ''; ?>">
-            <a href="index.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : ''; ?>">
+        <!-- Dashboard -->
+        <li class="nav-item active">
+            <a href="index.html" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>All Bookmarks</p>
             </a>
         </li>
-        <li class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'recipe.php' ? 'menu-open' : ''; ?>">
-            <a href="recipe.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'recipe.php' ? 'active' : ''; ?>">
+
+        <!-- Recipes -->
+        <li class="nav-item">
+            <a href="recipe.php" class="nav-link">
                 <i class="nav-icon fas fa-utensils"></i>
                 <p>Recipes</p>
             </a>
         </li>
-        <li class="nav-item has-treeview <?php echo basename($_SERVER['PHP_SELF']) == 'sports.php' ? 'menu-open' : ''; ?>">
-    <a href="sports.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'sports.php' ? 'active' : ''; ?>">
-        <i class="nav-icon fas fa-basketball-ball"></i>
-        <p>Sports</p>
-    </a>
-</li>
-<li class="nav-item has-treeview <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'menu-open' : ''; ?>">
-    <a href="news.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>">
-        <i class="nav-icon fas fa-newspaper"></i>
-        <p>News</p>
-    </a>
-</li>
-<li class="nav-item has-treeview <?php echo basename($_SERVER['PHP_SELF']) == 'meditation.php' ? 'menu-open' : ''; ?>">
-    <a href="meditation.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'meditation.php' ? 'active' : ''; ?>">
-        <i class="nav-icon fab fa-galactic-republic"></i>
-        <p>Meditation</p>
-    </a>
-</li>
-<li class="nav-item has-treeview <?php echo basename($_SERVER['PHP_SELF']) == 'travel.php' ? 'menu-open' : ''; ?>">
-    <a href="travel.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'travel.php' ? 'active' : ''; ?>">
-        <i class="nav-icon fas fa-plane-departure"></i>
-        <p>Travel</p>
-    </a>
-</li>
 
-                        <br>
-                        <br>
-                        <div class="text-center">
-                            <a href="category.html">
-                                <button class="btn btn-primary"  style="width: 200px; border-radius: 20px;">New Category</button></a>
-                        </div>
-                        <br>
-                        <div class="toggle-container ml-4">
-                            <label class="switch">
-                                <input type="checkbox" id="modeToggle">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <script>
-                            document.getElementById('modeToggle').addEventListener('change', function() {
-                                const body = document.body;
-                                if (this.checked) {
-                                    body.classList.add('dark-mode');
-                                } else {
-                                    body.classList.remove('dark-mode');
-                                }
-                            });
-                        </script>
-                    </ul>
-                </nav>
+        <!-- Sports -->
+        <li class="nav-item">
+            <a href="sports.php" class="nav-link">
+                <i class="nav-icon fas fa-basketball-ball"></i>
+                <p>Sports</p>
+            </a>
+        </li>
+
+        <!-- News -->
+        <li class="nav-item">
+            <a href="news.php" class="nav-link">
+                <i class="nav-icon fas fa-newspaper"></i>
+                <p>News</p>
+            </a>
+        </li>
+
+        <!-- Meditation -->
+        <li class="nav-item">
+            <a href="meditation.php" class="nav-link">
+                <i class="nav-icon fab fa-galactic-republic"></i>
+                <p>Meditation</p>
+            </a>
+        </li>
+
+        <!-- Travel -->
+        <li class="nav-item">
+            <a href="travel.php" class="nav-link">
+                <i class="nav-icon fas fa-plane-departure"></i>
+                <p>Travel</p>
+            </a>
+        </li>
+
+        <!-- New Category -->
+        <li class="nav-item">
+            <a href="category.html" class="nav-link">
+                <i class="nav-icon fas fa-plus-circle"></i>
+                <p>New Category</p>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- /.sidebar-menu -->
+
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
@@ -168,53 +149,18 @@ if ($conn->connect_error) {
 
             <!-- Content Header (Page header) -->
             <div class="container">
-      <ul class="nav nav-pills justify-content font-weight-bold">
-        <li class="nav-item">
-          <a class="tab-link active" id="all" onclick="filterContent('all')">All</a>
-        </li>
+                <ul class="nav nav-pills justify-content font-weight-bold">
+                    <li class="nav-item">
+                        <a class="tab-link active" id="all" onclick="filterContent('all')">All</a>
+                    </li>
+                </ul>
+                <br>
+                <br>
 
-      </ul>
-      <br>
-
-      <br>
-
-      <div class="row" id="content">
-      <?php
-          echo "<div class='container'>";
-          echo "<div class='row'>"; // Start a new row
-
-          // Fetch details for the "sports" category from the database
-          $category_name = "sports"; // Set the category name to "sports"
-          $categorySql = "SELECT * FROM details";
-          $categoryResult = $conn->query($categorySql);
-
-          if ($categoryResult->num_rows > 0) {
-              while ($categoryRow = $categoryResult->fetch_assoc()) {
-                  echo "<div class='col-md-4'>"; // Start a new column
-                  echo "<div class='card' data-category-type='{$categoryRow["category_type"]}'>"; // Add data-category-type attribute
-                  if (!empty($categoryRow["detail_image"])) {
-                      echo "<img src='uploads/{$categoryRow["detail_image"]}' class='card-img-top' alt='Image'>";
-                  }
-                  echo "<div class='card-img-overlay'>";
-                  echo "<h5 class='card-title'>" . $categoryRow["detail_name"] . "</h5>";
-                  echo "<p class='card-text'>" . $categoryRow["detail_description"] . "</p>";
-                  echo "<a href='" . $categoryRow["detail_url"] . "' class='card-link'>Read Blog</a>";
-                  echo "</div>";
-                  echo "</div>";
-                  echo "</div>"; // End column
-              }
-          } else {
-              echo "No results found for the category 'sports'";
-          }
-
-          echo "</div>"; // End row
-          echo "</div>"; // End container
-
-          // Close the connection
-          $conn->close();
-        ?>
-      </div>
-    </div>
+                <div class="row" id="content">
+                    <!-- Content from PHP will be loaded here -->
+                </div>
+            </div>
 
         </div>
         <!-- Control Sidebar -->
@@ -224,71 +170,68 @@ if ($conn->connect_error) {
 
         <!-- jQuery -->
         <script src="plugins/jquery/jquery.min.js"></script>
-        <!-- jQuery UI 1.11.4 -->
-        <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-        <script>
-            $.widget.bridge('uibutton', $.ui.button)
-        </script>
-
-<script>
-  // Filter and display content based on type
-  function filterContent(categoryType) {
-    console.log('Filtering content for type:', categoryType);
-
-    // Remove active class from all nav links
-    document.querySelectorAll('.tab-link').forEach(link => {
-      link.classList.remove('active');
-    });
-
-    // Add active class to the clicked nav link
-    document.getElementById(categoryType).classList.add('active');
-
-    // Show all cards initially
-    document.querySelectorAll('.card').forEach(card => {
-      card.style.display = 'block';
-    });
-
-    // Filter cards based on category type
-    if (categoryType !== 'all') {
-      document.querySelectorAll('.card').forEach(card => {
-        if (card.getAttribute('data-category-type') !== categoryType) {
-          card.style.display = 'none';
-        }
-      });
-    }
-  }
-
-  // Initially display all content
-  filterContent('all');
-</script>
-
         <!-- Bootstrap 4 -->
         <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- ChartJS -->
-        <script src="plugins/chart.js/Chart.min.js"></script>
-        <!-- Sparkline -->
-        <script src="plugins/sparklines/sparkline.js"></script>
-        <!-- JQVMap -->
-        <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-        <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-        <!-- jQuery Knob Chart -->
-        <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-        <!-- daterangepicker -->
-        <script src="plugins/moment/moment.min.js"></script>
-        <script src="plugins/daterangepicker/daterangepicker.js"></script>
-        <!-- Tempusdominus Bootstrap 4 -->
-        <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-        <!-- Summernote -->
-        <script src="plugins/summernote/summernote-bs4.min.js"></script>
-        <!-- overlayScrollbars -->
-        <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
         <!-- AdminLTE App -->
         <script src="dist/js/adminlte.js"></script>
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="dist/js/pages/dashboard.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="dist/js/demo.js"></script>
+
+        <!-- Custom Script -->
+        <script>
+            // Filter and display content based on type
+            function filterContent(categoryType) {
+                console.log('Filtering content for type:', categoryType);
+
+                // Remove active class from all nav links
+                document.querySelectorAll('.tab-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+
+                // Add active class to the clicked nav link
+                document.getElementById(categoryType).classList.add('active');
+
+                // Show all cards initially
+                document.querySelectorAll('.card').forEach(card => {
+                    card.style.display = 'block';
+                });
+
+                // Filter cards based on category type
+                if (categoryType !== 'all') {
+                    document.querySelectorAll('.card').forEach(card => {
+                        if (card.getAttribute('data-category-type') !== categoryType) {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+            }
+
+            // Initially display all content
+            filterContent('all');
+        </script>
+        <script>
+            // Function to fetch data from index.php using AJAX
+            function fetchData() {
+                // Create an AJAX request
+                var xhttp = new XMLHttpRequest();
+        
+                // Define what happens on successful data retrieval
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // Update the content of the "content" div with the response from index.php
+                        document.getElementById("content").innerHTML = this.responseText;
+                    }
+                };
+        
+                // Open a GET request to index.php
+                xhttp.open("GET", "index.php", true);
+                // Send the request
+                xhttp.send();
+            }
+        
+            // Call the fetchData function when the page loads
+            window.onload = function () {
+                fetchData();
+            };
+        </script>
 </body>
 
 </html>
