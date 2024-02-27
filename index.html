@@ -31,13 +31,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="manifest" href="/dist/manifest.json">
 
-    <style>
-        /* Your custom styles here */
-    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
+
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -47,6 +45,8 @@
                 </li>
             </ul>
             <h2>All </h2>
+
+
             <!-- SEARCH FORM -->
             <div class="navbar-brand mx-auto"> <!-- Center the content horizontally -->
                 <form class="form-inline">
@@ -54,7 +54,7 @@
                         <input class="form-control form-control-navbar" type="search" aria-label="Search" style="background-color: #b0afaf; color: #333;">
                         <div class="input-group-append ">
                             <button class="btn btn-navbar" style="background-color: #b0afaf; " type="submit">
-                                <i class="fas fa-search"  ></i>
+                                <i class="fas fa-search"></i>
                             </button>
                         </div>
                     </div>
@@ -64,6 +64,7 @@
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-light-primary elevation-4">
+
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
@@ -75,6 +76,7 @@
                 </div>
                 <br>
                 <!-- Sidebar Menu -->
+                <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Dashboard -->
@@ -84,6 +86,7 @@
                                 <p>All Bookmarks</p>
                             </a>
                         </li>
+
                         <!-- Recipes -->
                         <li class="nav-item">
                             <a href="recipe.php" class="nav-link">
@@ -91,6 +94,7 @@
                                 <p>Recipes</p>
                             </a>
                         </li>
+
                         <!-- Sports -->
                         <li class="nav-item">
                             <a href="sports.php" class="nav-link">
@@ -98,6 +102,7 @@
                                 <p>Sports</p>
                             </a>
                         </li>
+
                         <!-- News -->
                         <li class="nav-item">
                             <a href="news.php" class="nav-link">
@@ -105,6 +110,7 @@
                                 <p>News</p>
                             </a>
                         </li>
+
                         <!-- Meditation -->
                         <li class="nav-item">
                             <a href="meditation.php" class="nav-link">
@@ -112,6 +118,7 @@
                                 <p>Meditation</p>
                             </a>
                         </li>
+
                         <!-- Travel -->
                         <li class="nav-item">
                             <a href="travel.php" class="nav-link">
@@ -119,6 +126,7 @@
                                 <p>Travel</p>
                             </a>
                         </li>
+
                         <!-- New Category -->
                         <li class="nav-item">
                             <a href="category.html" class="nav-link">
@@ -131,67 +139,92 @@
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
+
         </aside>
 
         <div class="content-wrapper">
             <br>
+
             <!-- Content Header (Page header) -->
             <div class="container">
+                <!-- Selectable Titles -->
                 <ul class="nav nav-pills justify-content font-weight-bold">
                     <li class="nav-item">
                         <a class="tab-link active" id="all" onclick="filterContent('all')">All</a>
                     </li>
+                    <!-- Your other nav items here -->
                 </ul>
                 <br>
-                <br>
+
+                <!-- Content Section -->
                 <div class="row" id="content">
-                    <!-- Content from PHP will be loaded here -->
+                    <!-- PHP code starts here -->
+                    <?php
+                    // Database configuration
+                    $servername = "localhost:3308";
+                    $username = "root";
+                    $password = "ish@123";
+                    $database = "bookmark";
+
+                    // Create connection
+                    $conn = new mysqli($servername, $username, $password, $database);
+
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    // Fetch details for the "sports" category from the database
+                    $category_name = "sports"; // Set the category name to "sports"
+                    $categorySql = "SELECT * FROM details";
+                    $categoryResult = $conn->query($categorySql);
+
+                    if ($categoryResult->num_rows > 0) {
+                        while ($categoryRow = $categoryResult->fetch_assoc()) {
+                            echo "<div class='col-md-4'>"; // Start a new column
+                            echo "<div class='card' data-category-type='{$categoryRow["category_type"]}'>"; // Add data-category-type attribute
+                            if (!empty($categoryRow["detail_image"])) {
+                                echo "<img src='uploads/{$categoryRow["detail_image"]}' class='card-img-top' alt='Image'>";
+                            }
+                            echo "<div class='card-img-overlay'>";
+                            echo "<h5 class='card-title'>" . $categoryRow["detail_name"] . "</h5>";
+                            echo "<p class='card-text'>" . $categoryRow["detail_description"] . "</p>";
+                            echo "<a href='" . $categoryRow["detail_url"] . "' class='card-link'>Read Blog</a>";
+                            echo "</div>";
+                            echo "</div>";
+                            echo "</div>"; // End column
+                        }
+                    } else {
+                        echo "No results found for the category 'sports'";
+                    }
+
+                    // Close the connection
+                    $conn->close();
+                    ?>
+                    <!-- PHP code ends here -->
                 </div>
             </div>
+
         </div>
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
         </aside>
-
-        <!-- Your JavaScript imports and scripts here -->
-
-        <!-- Custom Script to fetch data from index.php -->
-        <script>
-            // Function to fetch data from index.php using AJAX
-            function fetchData() {
-                // Create an AJAX request
-                var xhttp = new XMLHttpRequest();
-
-                // Define what happens on successful data retrieval
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        // Update the content of the "content" div with the response from index.php
-                        document.getElementById("content").innerHTML = this.responseText;
-                    }
-                };
-
-                // Open a GET request to index.php
-                xhttp.open("GET", "index.php", true);
-                // Send the request
-                xhttp.send();
-            }
-
-            // Call the fetchData function when the page loads
-            window.onload = function () {
-                fetchData();
-            };
-        </script>
-
-        <!-- jQuery -->
-        <script src="plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="dist/js/adminlte.js"></script>
-        <!-- Your other scripts here -->
+        <!-- /.control-sidebar -->
     </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- Your custom scripts here -->
+    <script src="utils.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Your other scripts -->
 </body>
 
 </html>
