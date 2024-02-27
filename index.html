@@ -54,7 +54,7 @@
                         <input class="form-control form-control-navbar" type="search" aria-label="Search" style="background-color: #b0afaf; color: #333;">
                         <div class="input-group-append ">
                             <button class="btn btn-navbar" style="background-color: #b0afaf; " type="submit">
-                                <i class="fas fa-search"></i>
+                                <i class="fas fa-search"  ></i>
                             </button>
                         </div>
                     </div>
@@ -76,7 +76,6 @@
                 </div>
                 <br>
                 <!-- Sidebar Menu -->
-                <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Dashboard -->
@@ -86,48 +85,36 @@
                                 <p>All Bookmarks</p>
                             </a>
                         </li>
-
-                        <!-- Recipes -->
                         <li class="nav-item">
                             <a href="recipe.php" class="nav-link">
                                 <i class="nav-icon fas fa-utensils"></i>
                                 <p>Recipes</p>
                             </a>
                         </li>
-
-                        <!-- Sports -->
                         <li class="nav-item">
                             <a href="sports.php" class="nav-link">
                                 <i class="nav-icon fas fa-basketball-ball"></i>
                                 <p>Sports</p>
                             </a>
                         </li>
-
-                        <!-- News -->
                         <li class="nav-item">
                             <a href="news.php" class="nav-link">
                                 <i class="nav-icon fas fa-newspaper"></i>
                                 <p>News</p>
                             </a>
                         </li>
-
-                        <!-- Meditation -->
                         <li class="nav-item">
                             <a href="meditation.php" class="nav-link">
                                 <i class="nav-icon fab fa-galactic-republic"></i>
                                 <p>Meditation</p>
                             </a>
                         </li>
-
-                        <!-- Travel -->
                         <li class="nav-item">
                             <a href="travel.php" class="nav-link">
                                 <i class="nav-icon fas fa-plane-departure"></i>
                                 <p>Travel</p>
                             </a>
                         </li>
-
-                        <!-- New Category -->
                         <li class="nav-item">
                             <a href="category.html" class="nav-link">
                                 <i class="nav-icon fas fa-plus-circle"></i>
@@ -147,84 +134,60 @@
 
             <!-- Content Header (Page header) -->
             <div class="container">
-                <!-- Selectable Titles -->
                 <ul class="nav nav-pills justify-content font-weight-bold">
                     <li class="nav-item">
                         <a class="tab-link active" id="all" onclick="filterContent('all')">All</a>
                     </li>
-                    <!-- Your other nav items here -->
                 </ul>
                 <br>
+                <br>
 
-                <!-- Content Section -->
                 <div class="row" id="content">
-                    <!-- PHP code starts here -->
-                    <?php
-                    // Database configuration
-                    $servername = "localhost:3308";
-                    $username = "root";
-                    $password = "ish@123";
-                    $database = "bookmark";
-
-                    // Create connection
-                    $conn = new mysqli($servername, $username, $password, $database);
-
-                    // Check connection
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-
-                    // Fetch details for the "sports" category from the database
-                    $category_name = "sports"; // Set the category name to "sports"
-                    $categorySql = "SELECT * FROM details";
-                    $categoryResult = $conn->query($categorySql);
-
-                    if ($categoryResult->num_rows > 0) {
-                        while ($categoryRow = $categoryResult->fetch_assoc()) {
-                            echo "<div class='col-md-4'>"; // Start a new column
-                            echo "<div class='card' data-category-type='{$categoryRow["category_type"]}'>"; // Add data-category-type attribute
-                            if (!empty($categoryRow["detail_image"])) {
-                                echo "<img src='uploads/{$categoryRow["detail_image"]}' class='card-img-top' alt='Image'>";
-                            }
-                            echo "<div class='card-img-overlay'>";
-                            echo "<h5 class='card-title'>" . $categoryRow["detail_name"] . "</h5>";
-                            echo "<p class='card-text'>" . $categoryRow["detail_description"] . "</p>";
-                            echo "<a href='" . $categoryRow["detail_url"] . "' class='card-link'>Read Blog</a>";
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</div>"; // End column
-                        }
-                    } else {
-                        echo "No results found for the category 'sports'";
-                    }
-
-                    // Close the connection
-                    $conn->close();
-                    ?>
-                    <!-- PHP code ends here -->
+                    <!-- Content from PHP will be loaded here -->
                 </div>
             </div>
 
         </div>
-
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
         </aside>
-        <!-- /.control-sidebar -->
-    </div>
-    <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.min.js"></script>
-    <!-- Your custom scripts here -->
-    <script src="utils.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Your other scripts -->
+        <!-- jQuery -->
+        <script src="plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="dist/js/adminlte.js"></script>
+
+        <!-- Custom Script -->
+        <script>
+            // Filter and display content based on type
+            function filterContent(categoryType) {
+                console.log('Filtering content for type:', categoryType);
+
+                // Remove active class from all nav links
+                document.querySelectorAll('.tab-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+
+                // Add active class to the clicked nav link
+                document.getElementById(categoryType).classList.add('active');
+
+                // Fetch content based on category type
+                $.ajax({
+                    url: 'fetch_content.php',
+                    method: 'POST',
+                    data: { categoryType: categoryType },
+                    success: function(response) {
+                        $('#content').html(response);
+                    }
+                });
+            }
+
+            // Initially display all content
+            filterContent('all');
+        </script>
 </body>
 
 </html>
