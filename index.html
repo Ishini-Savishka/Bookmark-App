@@ -31,11 +31,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="manifest" href="/dist/manifest.json">
 
+    <style>
+        /* Your custom styles here */
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -45,8 +47,6 @@
                 </li>
             </ul>
             <h2>All </h2>
-
-
             <!-- SEARCH FORM -->
             <div class="navbar-brand mx-auto"> <!-- Center the content horizontally -->
                 <form class="form-inline">
@@ -64,7 +64,6 @@
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-light-primary elevation-4">
-
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
@@ -76,77 +75,66 @@
                 </div>
                 <br>
                 <!-- Sidebar Menu -->
-<!-- Sidebar Menu -->
-<nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Dashboard -->
-        <li class="nav-item active">
-            <a href="index.html" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>All Bookmarks</p>
-            </a>
-        </li>
-
-        <!-- Recipes -->
-        <li class="nav-item">
-            <a href="recipe.php" class="nav-link">
-                <i class="nav-icon fas fa-utensils"></i>
-                <p>Recipes</p>
-            </a>
-        </li>
-
-        <!-- Sports -->
-        <li class="nav-item">
-            <a href="sports.php" class="nav-link">
-                <i class="nav-icon fas fa-basketball-ball"></i>
-                <p>Sports</p>
-            </a>
-        </li>
-
-        <!-- News -->
-        <li class="nav-item">
-            <a href="news.php" class="nav-link">
-                <i class="nav-icon fas fa-newspaper"></i>
-                <p>News</p>
-            </a>
-        </li>
-
-        <!-- Meditation -->
-        <li class="nav-item">
-            <a href="meditation.php" class="nav-link">
-                <i class="nav-icon fab fa-galactic-republic"></i>
-                <p>Meditation</p>
-            </a>
-        </li>
-
-        <!-- Travel -->
-        <li class="nav-item">
-            <a href="travel.php" class="nav-link">
-                <i class="nav-icon fas fa-plane-departure"></i>
-                <p>Travel</p>
-            </a>
-        </li>
-
-        <!-- New Category -->
-        <li class="nav-item">
-            <a href="category.html" class="nav-link">
-                <i class="nav-icon fas fa-plus-circle"></i>
-                <p>New Category</p>
-            </a>
-        </li>
-    </ul>
-</nav>
-<!-- /.sidebar-menu -->
-
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Dashboard -->
+                        <li class="nav-item active">
+                            <a href="index.html" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>All Bookmarks</p>
+                            </a>
+                        </li>
+                        <!-- Recipes -->
+                        <li class="nav-item">
+                            <a href="recipe.php" class="nav-link">
+                                <i class="nav-icon fas fa-utensils"></i>
+                                <p>Recipes</p>
+                            </a>
+                        </li>
+                        <!-- Sports -->
+                        <li class="nav-item">
+                            <a href="sports.php" class="nav-link">
+                                <i class="nav-icon fas fa-basketball-ball"></i>
+                                <p>Sports</p>
+                            </a>
+                        </li>
+                        <!-- News -->
+                        <li class="nav-item">
+                            <a href="news.php" class="nav-link">
+                                <i class="nav-icon fas fa-newspaper"></i>
+                                <p>News</p>
+                            </a>
+                        </li>
+                        <!-- Meditation -->
+                        <li class="nav-item">
+                            <a href="meditation.php" class="nav-link">
+                                <i class="nav-icon fab fa-galactic-republic"></i>
+                                <p>Meditation</p>
+                            </a>
+                        </li>
+                        <!-- Travel -->
+                        <li class="nav-item">
+                            <a href="travel.php" class="nav-link">
+                                <i class="nav-icon fas fa-plane-departure"></i>
+                                <p>Travel</p>
+                            </a>
+                        </li>
+                        <!-- New Category -->
+                        <li class="nav-item">
+                            <a href="category.html" class="nav-link">
+                                <i class="nav-icon fas fa-plus-circle"></i>
+                                <p>New Category</p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
-
         </aside>
 
         <div class="content-wrapper">
             <br>
-
             <!-- Content Header (Page header) -->
             <div class="container">
                 <ul class="nav nav-pills justify-content font-weight-bold">
@@ -156,63 +144,26 @@
                 </ul>
                 <br>
                 <br>
-
                 <div class="row" id="content">
                     <!-- Content from PHP will be loaded here -->
                 </div>
             </div>
-
         </div>
+
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
         </aside>
 
-        <!-- jQuery -->
-        <script src="plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="dist/js/adminlte.js"></script>
+        <!-- Your JavaScript imports and scripts here -->
 
-        <!-- Custom Script -->
-        <script>
-            // Filter and display content based on type
-            function filterContent(categoryType) {
-                console.log('Filtering content for type:', categoryType);
-
-                // Remove active class from all nav links
-                document.querySelectorAll('.tab-link').forEach(link => {
-                    link.classList.remove('active');
-                });
-
-                // Add active class to the clicked nav link
-                document.getElementById(categoryType).classList.add('active');
-
-                // Show all cards initially
-                document.querySelectorAll('.card').forEach(card => {
-                    card.style.display = 'block';
-                });
-
-                // Filter cards based on category type
-                if (categoryType !== 'all') {
-                    document.querySelectorAll('.card').forEach(card => {
-                        if (card.getAttribute('data-category-type') !== categoryType) {
-                            card.style.display = 'none';
-                        }
-                    });
-                }
-            }
-
-            // Initially display all content
-            filterContent('all');
-        </script>
+        <!-- Custom Script to fetch data from index.php -->
         <script>
             // Function to fetch data from index.php using AJAX
             function fetchData() {
                 // Create an AJAX request
                 var xhttp = new XMLHttpRequest();
-        
+
                 // Define what happens on successful data retrieval
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
@@ -220,18 +171,27 @@
                         document.getElementById("content").innerHTML = this.responseText;
                     }
                 };
-        
+
                 // Open a GET request to index.php
                 xhttp.open("GET", "index.php", true);
                 // Send the request
                 xhttp.send();
             }
-        
+
             // Call the fetchData function when the page loads
             window.onload = function () {
                 fetchData();
             };
         </script>
+
+        <!-- jQuery -->
+        <script src="plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="dist/js/adminlte.js"></script>
+        <!-- Your other scripts here -->
+    </div>
 </body>
 
 </html>
